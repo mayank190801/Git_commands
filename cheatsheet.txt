@@ -2,8 +2,9 @@ git config --global -e  //For opening git config file on vscode
 git config --global user.name "Diksha Singh"  //To configure the name that Git will associate with your work 
 git config --global user.email "diksha@gmail.com"  //To configure the email that Git will associate with your work
 
-TERMINAL CRASH COURSE
+-- TERMINAL CRASH COURSE --
 ls -> list to contents of the current directory
+ls -a -> to look at hidden files in the current directory
 open . -> open up the current folder (doesn't work on windows) (start . works!!!!)
 clear -> clear a lot of stuff on bash
 pwd -> prints out the current location
@@ -14,14 +15,37 @@ touch random.java  -> creation of files, could be multiple as well
 mkdir 1900questions -> creation of folders (mkdir "Sea Turtles")
 rm 1900questions -> delete files
 rm -rf Plants -> delete folders
+rm -rf .git -> for remove the git repository
 
-GIT COMMANDS
+-- GIT COMMANDS --
 git status  //current status of repository
-git init   //creates a new git repository 
+git status -s  //short status
+git diff --staged //to view what changes are going in the next commit
+git init  //creates a new git repository 
+git add . //add all files to staging area
 git add file1 file2 //adding files to staging area
 git commit -m "my message" //commiting a message
+git commit //open up the code editor for us to add more details
+git commit --amend //rename the last commit - open up in box in vscode
 git log  //checkin previous commits
+git log --oneline //better view of commits log 
 
 Visual Studio Code --> git config --global core.editor "code --wait"  //for making vs code your default editor
 Vim --> git config --global core.editor "Vim"  //for making vim as your default editor
-git log --oneline //better view of commits log 
+escape key --- :wq // commands to get out of the vim in terminal
+git ls-files //shows all the files in staging area
+
+git show <commit id> // this show what have been modified in that commit 
+git show HEAD~1  //just as above but using head pointer
+̵git restore --staged . //put all of changes back from staging area to main directory
+git restore --staged file1.js file2.js //you can be more specific with files if you want
+
+git restore . //undos all the local changes ie modifications only
+git clean -fd //will restore the file back to the last commit - all the files and directories created now will be deleted
+git restore --source=HEAD~1 file1.js //this way you can restore the file from that earlier commit , even if it got deleted
+
+
+
+
+
+
