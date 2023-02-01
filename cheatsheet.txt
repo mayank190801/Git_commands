@@ -76,17 +76,127 @@ git checkout master //to go back to master branch
 git checkout <commit id> file.txt  //using this we go back to the older version of the file in time
 git add .  //and now that file is in staging area 
 
+----- BRANCHING --------
+git branch <random-name>  //creates a branch with <random-name>
+git branch  //list all the branches available
+git status  //current branch
+git switch <random-name>  //put head at the new branch
+git switch -C bugfix-new-feature  //create and switch to a new branch
+git branch -m bugfix bugfix-signup-form  //renaming branch
+git branch -d bugfix-signup-form  //trying to delete
+git branch -D bugfix-signup-form  //forcing to delete
+git log master..bugfix-signup-form  //all the commits which are in bugfix branch but not in master
+git diff master..bugfix-signup-form //Acutally view the differences between both the branches
+
+----- STASHING -------- 
+--basically storing your current dirty work at some place and shifting to another branch in the mean time
+--find a use case and then come back to learn it again
+
+----- MERGING -------- 
+-fast-Forward (if branches have not diverged)
+-3-way-merge (if branches are diverged)
+git log --oneline --all --graph //to view graph structure of commits
+git merge bugfix-signup-form //fast forward from merge from master branch
+git merge --no-ff bugfix/login-form //merging without fast forward option --- PREFER THIS BAD BOI 
+-- the above command create a new commit for merging two branches -- (always remember that)
+git branch --merged //branches which have been merged with master
+git branch --no-merged  //vice versa
+git merge --abort //while you are in the merge conflict situation, you can come out of it using this command - SUPER HELPFUL
 
 
+----- RESETTING -------- 
+--one method-- (only if you haven't shared history with others)
+git reset --hard HEAD~1  //to complete go back one step - work dir + staging area as well
+git reset --mixed HEAD~1  //to complete go back one step - staging area as well
+git reset --soft HEAD~1  //to complete go back one step 
+
+--second method-- (preferred way if history is shared)
+git revert -m 1 HEAD //making one more commit which reverses the changes of the last merge
+
+----- SQUASH MERGING --------
+--All commits are merged into one 
+--In this there we can also use fast forwaring, but we don't do it
+--No extra commit in the master branch are there!!
+--* ----------* (mixture of that branch)
+    \* -- *
+git merge --squash <branch-name>  //for squash merges
+-- the older branch has to be deleted, this helps in linear history
+-- after this you will have the changes in your staging area, you just have to make a commit and done
+
+----- REBASE MERGING --------  (https://www.youtube.com/watch?v=RGtwxYqkkas)
+-- Extra commit in the master branch are there!!
+-- And we want to achieve squash merginggg
+git switch feature-random
+git rebase master  (rebasing the start point to the current commit of master branch)
+--while in the process of rebasing Conflicts you have to resolve this conflicts 
+git add <conflicted.file.txt> (and then choose below options to move forward)
+git rebase --continue (after fixing the conflicts do this)
+git rebase --skip
+git rebase --abort && git clean -fd (for some extra got created during this process)
+---You don't need to make any commits simple as that
 
 
+----- COLLABORATION -------- 
+git clone <url>  //cloning the repo in our local machines
+git fetch <url> //fetching all the changes in the remote branches
+git fetch origin branch //if you want to pull changes from some branch
+git merge origin/master //normal coping up with the changes on remote branch
+git pull  //will do fetch and merge 
+git pull --rebase  //will do fetch and rebase (no new commit would be there, main branch would be rebased on the new commits)
+git push //send our updated master branch and updates remote master branch 
+git push origin master //you can push changes to some specific branch as well
 
+----- COLLABORATION on a specific branch -------- 
+-- you can make a branch in here and push it upwards/or you can make branch on github --
+1st
+git fetch 
+git branch  
+git branch -r
+git switch -C feature/changepassword origin/feature/changepassword  //new branch is setup to track remote branch
 
+2nd
+git clone
+git branch 
+git switch -C feature/changepassword origin/feature/changepassword
+git commit
+git push 
 
+1st
+git pull
+git switch master
+git merge feature/changepassword
+git push 
+git push -d origin/featurepassword //deleting the branch on the github
+git branch
+git branch -d feature/changepassword  //deleting from local 
 
+2nd
+git switch master
+git pull
+git branch -d feature/changepassword
+git branch -r  //remote tracking branch is still there even tho deleted from github (use below command)
+git remote prune origin  //removes branches which do not exist on github
+
+----- REWRITE HISTORY -------- (go through them only if you are interested in this)
+-- why and when to rewrite history 
+-- undo or revert commits
+-- interactive rebasing
+-- get back lost commit
+
+-- you can figure out how tags work during COLLABORATION
+-- Cherry picking commits and features from different branch (extremely advance stuff)
 -- you can create your own alias commands if you want to -- (simply check it online)
 -- Using bisect feature & automation testing one can find where the bug started happening with quite ease!
 -- You can figure out how tags work for giving versions to project - git checkout v1.1 
+
+
+//Some theory basically 
+- fast-forward is pretty basic
+- 3-way-merge can cause conflicts between while files, and when you are merging it by going to master branch first and 
+then using the command git merge, it will go into conflict state, you have to fix the file, add it, and make a commit to resolve the 
+merge conflict and hence the branch will be merge to master branch then
+
+
 
 
 
