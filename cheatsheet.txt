@@ -1,0 +1,27 @@
+git config --global -e  //For opening git config file on vscode
+git config --global user.name "Diksha Singh"  //To configure the name that Git will associate with your work 
+git config --global user.email "diksha@gmail.com"  //To configure the email that Git will associate with your work
+
+TERMINAL CRASH COURSE
+ls -> list to contents of the current directory
+open . -> open up the current folder (doesn't work on windows) (start . works!!!!)
+clear -> clear a lot of stuff on bash
+pwd -> prints out the current location
+cd Code/Git -> reach desired folder 
+cd .. -> go one step back
+cd d:/ -> to change drives
+touch random.java  -> creation of files, could be multiple as well
+mkdir 1900questions -> creation of folders (mkdir "Sea Turtles")
+rm 1900questions -> delete files
+rm -rf Plants -> delete folders
+
+GIT COMMANDS
+git status  //current status of repository
+git init   //creates a new git repository 
+git add file1 file2 //adding files to staging area
+git commit -m "my message" //commiting a message
+git log  //checkin previous commits
+
+Visual Studio Code --> git config --global core.editor "code --wait"  //for making vs code your default editor
+Vim --> git config --global core.editor "Vim"  //for making vim as your default editor
+git log --oneline //better view of commits log 
