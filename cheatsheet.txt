@@ -17,9 +17,12 @@ rm 1900questions -> delete files
 rm -rf Plants -> delete folders
 rm -rf .git -> for remove the git repository
 
--- GIT COMMANDS --
+-------- GIT COMMANDS -----------
+
+----- BASIC --------
 git status  //current status of repository
 git status -s  //short status
+git ls-files //shows all the files in staging area
 git diff --staged //to view what changes are going in the next commit
 git init  //creates a new git repository 
 git add . //add all files to staging area
@@ -30,19 +33,70 @@ git commit --amend //rename the last commit - open up in box in vscode
 git log  //checkin previous commits
 git log --oneline //better view of commits log 
 
+----- SETTINGS --------
 Visual Studio Code --> git config --global core.editor "code --wait"  //for making vs code your default editor
 Vim --> git config --global core.editor "Vim"  //for making vim as your default editor
 escape key --- :wq // commands to get out of the vim in terminal
-git ls-files //shows all the files in staging area
 
+----- COMING BACK FROM STAGING AREA --------
 git show <commit id> // this show what have been modified in that commit 
 git show HEAD~1  //just as above but using head pointer
+git show HEAD~2 --name-status  //to exactly see which files were modified in that commit
 ̵git restore --staged . //put all of changes back from staging area to main directory
 git restore --staged file1.js file2.js //you can be more specific with files if you want
 
+----- REVERSE CHANGES --------
 git restore . //undos all the local changes ie modifications only
 git clean -fd //will restore the file back to the last commit - all the files and directories created now will be deleted
 git restore --source=HEAD~1 file1.js //this way you can restore the file from that earlier commit , even if it got deleted
+
+
+----- VIEWING HISTORY --------
+git log --oneline --all //to view all the commits from master branch perspective
+git log --oneline --stat  //more detailed logs with file changes told
+git log --oneline --patch //more more changes details line by line
+git log --oneline --author="mayank190801" //to view commits made by some author
+git log --oneline --grep="GUI" //searching all the commits with this specific word in there
+git log --oneline toc.txt //all the commits that have modified this file will be shown
+git log --oneline --stat toc.txt //all the addition and deletion of lines in commits that have modified this file will be shown
+git log --oneline --patch toc.txt  //you can actaully view how that file have evolved with time 
+git shortlog //to view contributions by different people till now
+git shortlog -s -n -e //only view number of contribution per author
+git blame audience.txt  //to find out which line of code is written by whom
+
+git diff HEAD~2 HEAD //to view the changes between two commits
+git diff HEAD~2 HEAD audience.txt //to view the changes between two commits on a specific file
+git diff HEAD~2 HEAD --name-status //only the names of changed files
+
+----- MOVING BACK & FORTH --------
+git checkout <commit id> //your head pointer will go at that commit - all files in the current directory will go back in time as well
+git checkout master //to go back to master branch
+
+----- RESTORING A DELETED FILE --------
+git checkout <commit id> file.txt  //using this we go back to the older version of the file in time
+git add .  //and now that file is in staging area 
+
+
+
+
+
+
+
+
+
+-- you can create your own alias commands if you want to -- (simply check it online)
+-- Using bisect feature & automation testing one can find where the bug started happening with quite ease!
+-- You can figure out how tags work for giving versions to project - git checkout v1.1 
+
+
+
+
+
+
+
+
+
+
 
 
 
